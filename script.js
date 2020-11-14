@@ -1,7 +1,19 @@
-function changeColor(e){
-    if (this.style.color === "blue") this.removeAttribute("style");
-    else this.style.color = "blue";
-}
+const add = (a, b) => a + b;
+const subtract = (a, b) => a - b;
+const multiply = (a, b) => a * b;
+const divide = (a, b) => a / b;
 
-document.querySelector("h1").addEventListener("mouseover",changeColor);
-document.querySelector("h1").addEventListener("mouseout",changeColor);
+function operate (operator, a, b){
+    switch(operate){
+        case "+":
+            return add(a, b);
+        case "-":
+            return subtract(a, b);
+        case "*":
+            return multiply(a, b);
+        case "/":
+            return divide(a, b);
+        default:
+            return "ERROR";
+    }
+}

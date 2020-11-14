@@ -1,3 +1,59 @@
-h1{
-    color:red;
+body{
+    background-color: lightslategray;
+}
+
+.calculator-container{
+    background-color: lightcyan;
+    height: 400px;
+    width: 400px;
+    display: grid;
+
+    grid-template:
+    "display display display display display"
+    "number number number operators other"
+    "number number number operators other"
+    "number number number operators other"
+    "zero other2 other2 operators equals";
+}
+
+.calc-display{
+    grid-area: display;
+    background-color: gray;
+    color: lightblue;
+    font-size: 4em;
+    padding: auto;
+    margin:auto;
+    
+}
+
+.calc-numbers-1-9{
+    background-color: lightcyan;
+    border: 1px pink solid;
+    grid-area: number;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+
+.calc-btn{
+    height: 80%;
+    width: 80%;
+    margin: auto;
+}
+
+.calc-equals{
+    grid-area: equals;
+}
+
+.calc-operators{
+    background-color: lightcoral;
+    grid-area: operators;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.calc-number-0{
+    grid-area: zero;
+    border: blue solid 1px;
 }
