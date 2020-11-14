@@ -17,3 +17,12 @@ function operate (operator, a, b){
             return "ERROR";
     }
 }
+
+function addNumberToDisplay(e){
+    const pressedNumber = this.innerText;
+    const displayHtml = document.querySelector(".calc-display");
+    if (displayHtml.innerText == 0) displayHtml.innerText = pressedNumber;
+    else displayHtml.innerText += pressedNumber.toString();
+}
+
+document.querySelectorAll(".number-btn").forEach(btn => btn.addEventListener("click", addNumberToDisplay));
