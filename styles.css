@@ -1,37 +1,31 @@
-body{
-    background-color: lightslategray;
-}
-
 .calculator-container{
+    border: black 10px solid;
     background-color: lightcyan;
     height: 400px;
     width: 400px;
     display: grid;
-
     grid-template:
     "display display display display display"
-    "number number number operators other"
+    "number number number operators clear"
     "number number number operators other"
     "number number number operators other"
     "zero other2 other2 operators equals";
-
     column-gap: 10px;
     row-gap: 10px;
-    padding: 10px;
+    padding: 10px 13px 10px 10px;
 }
 
 .calc-display{
+    border: black 2px solid;
+    height: 65%;
+    width: 100%;
     grid-area: display;
-    background-color: gray;
-    color: lightblue;
+    background-color: lightgray;
     font-size: 4em;
-    padding: auto;
-    margin:auto;
-    
+    text-align: right;
 }
 
 .calc-numbers-1-9{
-
     grid-area: number;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -43,24 +37,43 @@ body{
 .calc-btn{
     height: 100%;
     width: 100%;
-
-
 }
 
 .calc-equals{
     grid-area: equals;
 }
 
+.calc-clear{
+    grid-area: clear;
+}
+
 .calc-operators{
-    background-color: lightcoral;
     grid-area: operators;
     display: flex;
     flex-direction: column;
     column-gap: 10px;
     row-gap: 10px;
+}
 
+.calc-operator{
+    height: 25%;
 }
 
 .calc-number-0{
     grid-area: zero;
+}
+
+.operator-btn{
+    background-color: lightgray;
+    outline: none;
+}
+
+.equals-btn{
+    background-color: red;
+    outline: none;
+}
+
+.clear-btn{
+    background-color:orange;
+    outline: none;
 }
