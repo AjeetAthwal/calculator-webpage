@@ -14,6 +14,10 @@ body{
     "number number number operators other"
     "number number number operators other"
     "zero other2 other2 operators equals";
+
+    column-gap: 10px;
+    row-gap: 10px;
+    padding: 10px;
 }
 
 .calc-display{
@@ -27,18 +31,20 @@ body{
 }
 
 .calc-numbers-1-9{
-    background-color: lightcyan;
-    border: 1px pink solid;
+
     grid-area: number;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 10px;
 }
 
 .calc-btn{
-    height: 80%;
-    width: 80%;
-    margin: auto;
+    height: 100%;
+    width: 100%;
+
+
 }
 
 .calc-equals{
@@ -50,10 +56,11 @@ body{
     grid-area: operators;
     display: flex;
     flex-direction: column;
+    column-gap: 10px;
+    row-gap: 10px;
 
 }
 
 .calc-number-0{
     grid-area: zero;
-    border: blue solid 1px;
 }
