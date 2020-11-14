@@ -1,8 +1,18 @@
+
+:root {
+    --gap-size: 20px;
+    --calc-height: 500px;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .calculator-container{
     border: black 10px solid;
     background-color: lightcyan;
-    height: 400px;
-    width: 400px;
+    height: var(--calc-height);
+    width: var(--calc-height);
     display: grid;
     grid-template:
     "display display display display display"
@@ -10,17 +20,17 @@
     "number number number operators other"
     "number number number operators other"
     "zero other2 other2 operators equals";
-    column-gap: 10px;
-    row-gap: 10px;
-    padding: 10px 13px 10px 10px;
+    column-gap: var(--gap-size);
+    row-gap: var(--gap-size);
+    padding: var(--gap-size) var(--gap-size) var(--gap-size) var(--gap-size);
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: var(--gap-size);
+    left: var(--gap-size);
 }
 
 .calc-display{
     border: black 2px solid;
-    height: 65%;
+    height: 60%;
     width: 100%;
     grid-area: display;
     background-color: lightgray;
@@ -33,8 +43,8 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    column-gap: 10px;
-    row-gap: 10px;
+    column-gap: var(--gap-size);
+    row-gap: var(--gap-size);
 }
 
 .calc-btn{
@@ -54,8 +64,8 @@
     grid-area: operators;
     display: flex;
     flex-direction: column;
-    column-gap: 10px;
-    row-gap: 10px;
+    column-gap: var(--gap-size);
+    row-gap: var(--gap-size);
 }
 
 .calc-operator{
@@ -119,4 +129,5 @@ button{
     outline: none;
     border:black 1px solid;
     border-radius: 4px;
+    font-size: 2em;
 }

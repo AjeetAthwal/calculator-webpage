@@ -9,7 +9,7 @@ let currentOperator = "";
 let lastInput = "";
 let infinityError = false;
 
-const DP = 11;
+const DP = 13;
 
 function getNumberLength(number){
     return number.toString().replace(".","").length
