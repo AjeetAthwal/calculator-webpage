@@ -36,7 +36,10 @@ function isOperator(input){
 }
 
 function addNumberToDisplay(e){
-    if (infinityError) document.querySelector(".calc-display").innerText = "LOL";
+    if (infinityError) {
+        document.querySelector(".calc-display").innerText = "LOL";
+        return;
+    }
     if (lastInput === "equals") return;
 
     let prevDisplayValue = displayValue;
@@ -71,7 +74,7 @@ document.querySelector(".clear-btn").addEventListener("click", clearDisplay)
 function calcNumbers(e){
     if (infinityError) return;
     if (!isOperator(lastInput)){
-        if (currentOperator !== "") storedValue = operate(currentOperator, storedValue, displayValue).toPrecision(DP);
+        if (currentOperator !== "") storedValue = Number(operate(currentOperator, storedValue, displayValue).toPrecision(DP));
         else storedValue = displayValue;
 
         console.log(storedValue);
@@ -95,7 +98,7 @@ function calculateDisplay(e){
     if (infinityError) return;
     if (lastInput === "equals") return;
     if (!isOperator(lastInput)){
-        if (currentOperator !== "") storedValue = operate(currentOperator, storedValue, displayValue).toPrecision(DP);
+        if (currentOperator !== "") storedValue = Number(operate(currentOperator, storedValue, displayValue).toPrecision(DP));
         else storedValue = displayValue;
 
         if (storedValue == Infinity) infinityError = true;
