@@ -64,18 +64,51 @@
 }
 
 .operator-btn{
-    background-color: lightgray;
+    background-color: rgb(200,200,200);
 }
 
+.operator-btn:hover{
+    background-color: rgb(180,180,180);
+}
+
+.operator-btn:active{
+    background-color: rgb(200,200,200);
+}
+
+
 .equals-btn{
-    background-color: red;
+    background-color: rgb(255, 0, 0);
+}
+
+.equals-btn:hover{
+    background-color: rgb(225,0,0);
+}
+
+.equals-btn:active{
+    background-color: rgb(255, 0, 0);
 }
 
 .clear-btn{
-    background-color:orange;
+    background-color:rgb(255,165,0);
+}
+
+.clear-btn:hover{
+    background-color:rgb(235,145,0);
+}
+
+.clear-btn:active{
+    background-color:rgb(255,165,0);
 }
 
 .number-btn{
+    background-color: rgb(240, 240, 240);
+}
+
+.number-btn:hover{
+    background-color: rgb(220, 220, 220);
+}
+
+.number-btn:active{
     background-color: rgb(240, 240, 240);
 }
 
