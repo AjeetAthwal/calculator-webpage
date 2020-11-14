@@ -65,15 +65,22 @@
 
 .operator-btn{
     background-color: lightgray;
-    outline: none;
 }
 
 .equals-btn{
     background-color: red;
-    outline: none;
 }
 
 .clear-btn{
     background-color:orange;
+}
+
+.number-btn{
+    background-color: rgb(240, 240, 240);
+}
+
+button{
     outline: none;
+    border:black 1px solid;
+    border-radius: 4px;
 }
