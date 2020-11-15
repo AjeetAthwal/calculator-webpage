@@ -58,8 +58,7 @@ function addNumberToDisplay(e){
     if (lastInput === "equals") return;
 
     const pressedNumber = this.innerText;
-    console.log(lastInput);
-    console.log(isOperator(lastInput));
+
     if (lastInput !== ""){
         if (!isOperator(lastInput)){
             if (pressedNumber == "." && displayValue.split("").indexOf(".") != -1) return;
