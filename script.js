@@ -57,14 +57,21 @@ function addNumberToDisplay(e){
     }
     if (lastInput === "equals") return;
 
+    const pressedNumber = this.innerText;
+    console.log(lastInput);
+    console.log(isOperator(lastInput));
+    if (lastInput !== ""){
+        if (!isOperator(lastInput)){
+            if (pressedNumber == "." && displayValue.split("").indexOf(".") != -1) return;
+        }
+    }
     let prevDisplayValue = displayValue;
     let prevLastInput = lastInput;
-    const pressedNumber = this.innerText;
     lastInput = pressedNumber;
     const displayHtml = document.querySelector(".calc-display");
     if (displayValue == 0) displayValue = pressedNumber;
     else displayValue += pressedNumber.toString();
-
+    
     if (getNumberLength(displayValue) > DP){
         displayValue = prevDisplayValue;
         lastInput  = prevLastInput;

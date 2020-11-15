@@ -19,7 +19,7 @@ body{
     "number number number operators clear"
     "number number number operators other"
     "number number number operators other"
-    "zero other2 other2 operators equals";
+    "zero decimal other2 operators equals";
     column-gap: var(--gap-size);
     row-gap: var(--gap-size);
     padding: var(--gap-size) var(--gap-size) var(--gap-size) var(--gap-size);
@@ -87,6 +87,10 @@ body{
 
 .calc-number-0{
     grid-area: zero;
+}
+
+.calc-decimal{
+    grid-area: decimal;
 }
 
 .operator-btn{
