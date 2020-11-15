@@ -28,11 +28,24 @@ body{
     left: var(--gap-size);
 }
 
+.calc-displays{
+    grid-area: display;
+    display: flex;
+    flex-direction: column;
+    background-color: lightgray;
+    border: 2px black solid;
+    height: 100%;
+    width: 100%;
+}
+
+.calc-small-display{
+    height: 40%;
+    width: 100%;
+}
+
 .calc-display{
-    border: black 2px solid;
     height: 60%;
     width: 100%;
-    grid-area: display;
     background-color: lightgray;
     font-size: 4em;
     text-align: right;

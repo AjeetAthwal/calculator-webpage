@@ -30,6 +30,21 @@ function operate (operator, a, b){
     }
 }
 
+function operatorToSign(operator){
+    switch(operator){
+        case "add":
+            return "+";
+        case "subtract":
+            return "-";
+        case "multiply":
+            return "×";
+        case "divide":
+            return "÷";
+        default:
+            return "ERROR";
+    }
+}
+
 function isOperator(input){
     if (input == "add" || input == "subtract" || input == "multiply" || input == "divide") return true;
     return false;
@@ -56,6 +71,8 @@ function addNumberToDisplay(e){
     }
 
     displayHtml.innerText = displayValue;
+    if (storedValue === 0) document.querySelector(".calc-small-display").innerText = displayValue;
+    else document.querySelector(".calc-small-display").innerText = storedValue + " " + operatorToSign(currentOperator) + " " + displayValue;
 }
 
 document.querySelectorAll(".number-btn").forEach(btn => btn.addEventListener("click", addNumberToDisplay));
@@ -66,6 +83,7 @@ function clearDisplay(e){
     currentOperator = "";
     lastInput = "";
     infinityError = false;
+    document.querySelector(".calc-small-display").innerText = 0;
     document.querySelector(".calc-display").innerText = displayValue;
 }
 
@@ -73,11 +91,12 @@ document.querySelector(".clear-btn").addEventListener("click", clearDisplay)
 
 function calcNumbers(e){
     if (infinityError) return;
+    if (lastInput === "") return;
     if (!isOperator(lastInput)){
         if (lastInput !== "equals"){
         if (currentOperator !== "") storedValue = Number(operate(currentOperator, storedValue, displayValue).toPrecision(DP));
         else storedValue = displayValue;
-        
+
         if (storedValue == Infinity) infinityError = true;
         }
         // this code relies on the first class name of these divs being of the structure e.g divide <- this class MUST be first
@@ -89,6 +108,8 @@ function calcNumbers(e){
         
         document.querySelector(".calc-display").innerText = storedValue;
         displayValue = 0;
+
+        document.querySelector(".calc-small-display").innerText = storedValue + " " + operatorToSign(currentOperator);
 
         if (infinityError) document.querySelector(".calc-display").innerText = "LOL";
     }
@@ -108,6 +129,8 @@ function calculateDisplay(e){
         lastInput = "equals";
         document.querySelector(".calc-display").innerText = storedValue;
         displayValue = 0;
+
+        document.querySelector(".calc-small-display").innerText = storedValue;
 
         if (infinityError) document.querySelector(".calc-display").innerText = "LOL";
     }
