@@ -8,6 +8,7 @@ let storedValue = 0;
 let currentOperator = "";
 let lastInput = "";
 let infinityError = false;
+let maxError = false;
 
 const DP = 13;
 
@@ -51,11 +52,7 @@ function isOperator(input) {
 }
 
 function addNumberToDisplay(e) {
-    if (infinityError) {
-        document.querySelector(".calc-display").innerText = "ERROR";
-        document.querySelector(".calc-small-display").innerText = "PLS DON'T DIVIDE BY 0";
-        return;
-    }
+    if (infinityError || maxError) return;
     if (lastInput === "equals") return;
 
     const pressedNumber = this.innerText;
@@ -65,10 +62,10 @@ function addNumberToDisplay(e) {
             if (pressedNumber == "." && displayValue.split("").indexOf(".") != -1) return;
         }
     }
+
     let prevDisplayValue = displayValue;
     let prevLastInput = lastInput;
     lastInput = pressedNumber;
-    const displayHtml = document.querySelector(".calc-display");
     if (displayValue == 0) displayValue = pressedNumber;
     else displayValue += pressedNumber.toString();
 
@@ -77,8 +74,8 @@ function addNumberToDisplay(e) {
         lastInput = prevLastInput;
     }
 
-    displayHtml.innerText = displayValue;
-    if (prevLastInput === "") document.querySelector(".calc-small-display").innerText = displayValue;
+    document.querySelector(".calc-display").innerText = displayValue;
+    if (prevLastInput === "" || operatorToSign(currentOperator) == "ERROR") document.querySelector(".calc-small-display").innerText = displayValue;
     else document.querySelector(".calc-small-display").innerText = storedValue + " " + operatorToSign(currentOperator) + " " + displayValue;
 }
 
@@ -93,7 +90,7 @@ function clearDisplay(e) {
 }
 
 function calcNumbers(e) {
-    if (infinityError) return;
+    if (infinityError || maxError) return;
     if (lastInput === "") return;
     if (!isOperator(lastInput)) {
         if (lastInput !== "equals") {
@@ -117,6 +114,12 @@ function calcNumbers(e) {
         if (infinityError) {
             document.querySelector(".calc-display").innerText = "ERROR";
             document.querySelector(".calc-small-display").innerText = "PLS DON'T DIVIDE BY 0";
+            return;
+        }
+        if (maxError) {
+            document.querySelector(".calc-display").innerText = "ERROR";
+            document.querySelector(".calc-small-display").innerText = "NUMBER IS TOO LARGE FOR THIS CALCULATOR";
+            return;
         }
     }
 }
@@ -139,6 +142,12 @@ function calculateDisplay(e) {
         if (infinityError) {
             document.querySelector(".calc-display").innerText = "ERROR";
             document.querySelector(".calc-small-display").innerText = "PLS DON'T DIVIDE BY 0";
+            return;
+        }
+        if (maxError) {
+            document.querySelector(".calc-display").innerText = "ERROR";
+            document.querySelector(".calc-small-display").innerText = "NUMBER IS TOO LARGE FOR THIS CALCULATOR";
+            return;
         }
     }
 }
