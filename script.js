@@ -78,7 +78,7 @@ function addNumberToDisplay(e) {
     }
 
     displayHtml.innerText = displayValue;
-    if (storedValue === 0) document.querySelector(".calc-small-display").innerText = displayValue;
+    if (prevLastInput === "") document.querySelector(".calc-small-display").innerText = displayValue;
     else document.querySelector(".calc-small-display").innerText = storedValue + " " + operatorToSign(currentOperator) + " " + displayValue;
 }
 
