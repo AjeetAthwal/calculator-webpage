@@ -85,6 +85,7 @@ function clearDisplay(e) {
     currentOperator = "";
     lastInput = "";
     infinityError = false;
+    maxError = false;
     document.querySelector(".calc-small-display").innerText = 0;
     document.querySelector(".calc-display").innerText = displayValue;
 }
@@ -98,6 +99,7 @@ function calcNumbers(e) {
             else storedValue = displayValue;
 
             if (storedValue == Infinity || isNaN(storedValue)) infinityError = true;
+            if (storedValue >= 10 ** DP) maxError = true;
         }
         // this code relies on the first class name of these divs being of the structure e.g divide <- this class MUST be first
         let operatorClass = this.parentElement.className;
@@ -132,6 +134,7 @@ function calculateDisplay(e) {
         else storedValue = displayValue;
 
         if (storedValue == Infinity || isNaN(storedValue)) infinityError = true;
+        if (storedValue >= 10 ** DP) maxError = true;
 
         lastInput = "equals";
         document.querySelector(".calc-display").innerText = storedValue;
