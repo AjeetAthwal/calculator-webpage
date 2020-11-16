@@ -10,7 +10,7 @@ let lastInput = "";
 let infinityError = false;
 let maxError = false;
 
-const DP = 13;
+const DP = 13; // max DP or SF before number is too big for screen
 
 function getNumberLength(number) {
     return number.toString().replace(".", "").length
