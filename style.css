@@ -19,7 +19,7 @@ body {
         "number number number operators clear"
         "number number number operators other"
         "number number number operators other"
-        "zero decimal other2 operators equals";
+        "number number number operators equals";
     column-gap: var(--gap-size);
     row-gap: var(--gap-size);
     padding: var(--gap-size) var(--gap-size) var(--gap-size) var(--gap-size);
@@ -52,11 +52,11 @@ body {
     text-align: right;
 }
 
-.calc-numbers-1-9 {
+.calc-numbers {
     grid-area: number;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 1fr);
     column-gap: var(--gap-size);
     row-gap: var(--gap-size);
 }
@@ -84,14 +84,6 @@ body {
 
 .calc-operator {
     height: 25%;
-}
-
-.calc-number-0 {
-    grid-area: zero;
-}
-
-.calc-decimal {
-    grid-area: decimal;
 }
 
 button {
