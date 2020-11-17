@@ -51,6 +51,41 @@ function isOperator(input) {
     return false;
 }
 
+function isMultiplyOrDivide(input) {
+    if (input == "multiply" || input == "divide") return true;
+    return false;
+}
+
+function checkErrors(storedValue){
+    if (storedValue == Infinity || isNaN(storedValue)) infinityError = true;
+    if (storedValue >= 10 ** DP) maxError = true;
+}
+
+function outputErrors(infinityError, maxError){
+    if (infinityError) {
+        document.querySelector(".calc-display").innerText = "ERROR";
+        document.querySelector(".calc-small-display").innerText = "PLEASE DON'T DIVIDE BY 0";
+        return;
+    }
+    if (maxError) {
+        document.querySelector(".calc-display").innerText = "ERROR";
+        document.querySelector(".calc-small-display").innerText = "NUMBER IS TOO LARGE";
+        return;
+    }
+}
+
+function outputDisplay(input){
+    // input is either operator or equals sign
+    lastInput = input;
+    document.querySelector(".calc-display").innerText = storedValue;
+    displayValue = 0;
+
+    if (input == "equals") document.querySelector(".calc-small-display").innerText = storedValue;
+    else document.querySelector(".calc-small-display").innerText = storedValue + " " + operatorToSign(input);
+
+    outputErrors(infinityError, maxError);
+}
+
 function addNumberToDisplay(e) {
     if (infinityError || maxError) return;
     if (lastInput === "equals") return;
@@ -90,76 +125,46 @@ function clearDisplay(e) {
     document.querySelector(".calc-display").innerText = displayValue;
 }
 
-function calcNumbers(e) {
+function checkInputError(){
     if (storedValue == 0 && displayValue == "." && lastInput == ".") {
         displayValue = 0;
         lastInput = 0;
     }
     if (infinityError || maxError) return;
+}
+
+function convertOperatorClassToOperator(className){
+    // this code relies on the first class name of these divs being of the structure e.g divide <- this class MUST be first
+    let operatorClass = className;
+    // keep only first class
+    if (operatorClass.indexOf(" ") !== -1) currentOperator = operatorClass.substring(0, operatorClass.indexOf(" "));
+}
+
+function calcNumbers(e) {
+    checkInputError();
     if (lastInput === "") return;
     if (!isOperator(lastInput)) {
         if (lastInput !== "equals") {
             if (currentOperator !== "") storedValue = Number(operate(currentOperator, storedValue, displayValue).toPrecision(DP));
             else storedValue = displayValue;
 
-            if (storedValue == Infinity || isNaN(storedValue)) infinityError = true;
-            if (storedValue >= 10 ** DP) maxError = true;
+            checkErrors(storedValue)
         }
-        // this code relies on the first class name of these divs being of the structure e.g divide <- this class MUST be first
-        let operatorClass = this.parentElement.className;
-        // keep only first class
-        if (operatorClass.indexOf(" ") !== -1) currentOperator = operatorClass.substring(0, operatorClass.indexOf(" "));
 
-        lastInput = currentOperator;
-
-        document.querySelector(".calc-display").innerText = storedValue;
-        displayValue = 0;
-
-        document.querySelector(".calc-small-display").innerText = storedValue + " " + operatorToSign(currentOperator);
-
-        if (infinityError) {
-            document.querySelector(".calc-display").innerText = "ERROR";
-            document.querySelector(".calc-small-display").innerText = "PLS DON'T DIVIDE BY 0";
-            return;
-        }
-        if (maxError) {
-            document.querySelector(".calc-display").innerText = "ERROR";
-            document.querySelector(".calc-small-display").innerText = "NUMBER IS TOO LARGE FOR THIS CALCULATOR";
-            return;
-        }
+        convertOperatorClassToOperator(this.parentElement.className);
+        outputDisplay(currentOperator);
     }
 }
 
 function calculateDisplay(e) {
-    if (storedValue == 0 && displayValue == "." && lastInput == ".") {
-        displayValue = 0;
-        lastInput = 0;
-    }
-    if (infinityError) return;
+    checkInputError();
     if (lastInput === "equals") return;
     if (!isOperator(lastInput)) {
         if (currentOperator !== "") storedValue = Number(operate(currentOperator, storedValue, displayValue).toPrecision(DP));
         else storedValue = displayValue;
 
-        if (storedValue == Infinity || isNaN(storedValue)) infinityError = true;
-        if (storedValue >= 10 ** DP) maxError = true;
-
-        lastInput = "equals";
-        document.querySelector(".calc-display").innerText = storedValue;
-        displayValue = 0;
-
-        document.querySelector(".calc-small-display").innerText = storedValue;
-
-        if (infinityError) {
-            document.querySelector(".calc-display").innerText = "ERROR";
-            document.querySelector(".calc-small-display").innerText = "PLS DON'T DIVIDE BY 0";
-            return;
-        }
-        if (maxError) {
-            document.querySelector(".calc-display").innerText = "ERROR";
-            document.querySelector(".calc-small-display").innerText = "NUMBER IS TOO LARGE FOR THIS CALCULATOR";
-            return;
-        }
+        checkErrors(storedValue);
+        outputDisplay("equals");
     }
 }
 
