@@ -91,6 +91,10 @@ function clearDisplay(e) {
 }
 
 function calcNumbers(e) {
+    if (storedValue == 0 && displayValue == "." && lastInput == ".") {
+        displayValue = 0;
+        lastInput = 0;
+    }
     if (infinityError || maxError) return;
     if (lastInput === "") return;
     if (!isOperator(lastInput)) {
@@ -127,6 +131,10 @@ function calcNumbers(e) {
 }
 
 function calculateDisplay(e) {
+    if (storedValue == 0 && displayValue == "." && lastInput == ".") {
+        displayValue = 0;
+        lastInput = 0;
+    }
     if (infinityError) return;
     if (lastInput === "equals") return;
     if (!isOperator(lastInput)) {
