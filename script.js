@@ -159,7 +159,7 @@ function calcNumbers(e) {
             checkErrors(storedValue)
         }
 
-        currentOperator = convertOperatorClassToOperator(this.parentElement.className);
+        currentOperator = thisOperator;
         outputDisplay(currentOperator);
         return;
     }
