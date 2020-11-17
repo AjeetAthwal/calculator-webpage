@@ -58,7 +58,7 @@ function isMultiplyOrDivide(input) {
 
 function checkErrors(storedValue){
     if (storedValue == Infinity || isNaN(storedValue)) infinityError = true;
-    if (storedValue >= 10 ** DP) maxError = true;
+    if (storedValue >= 10 ** DP || storedValue <= -1 * 10 ** DP) maxError = true;
 }
 
 function outputErrors(infinityError, maxError){
@@ -90,23 +90,25 @@ function addNumberToDisplay(e) {
     if (infinityError || maxError) return;
     if (lastInput === "equals") return;
 
-    const pressedNumber = this.innerText;
+    let pressedNumber = this.innerText;
+    if (pressedNumber === undefined) pressedNumber = convertOperatorClassToOperator(e.target.parentElement.className);
 
-    if (lastInput !== "") {
-        if (!isOperator(lastInput)) {
+    if (lastInput !== "")
+        if (!isOperator(lastInput));
             if (pressedNumber == "." && displayValue.split("").indexOf(".") != -1) return;
-        }
-    }
 
     let prevDisplayValue = displayValue;
     let prevLastInput = lastInput;
     lastInput = pressedNumber;
-    if (displayValue == 0) displayValue = pressedNumber;
+    if (pressedNumber == "subtract") displayValue = operatorToSign( pressedNumber);
+    else if (displayValue == 0) displayValue = pressedNumber;
     else displayValue += pressedNumber.toString();
 
-    if (getNumberLength(displayValue) > DP) {
-        displayValue = prevDisplayValue;
-        lastInput = prevLastInput;
+    if (pressedNumber != "-" ){
+        if (getNumberLength(displayValue) > DP) {
+            displayValue = prevDisplayValue;
+            lastInput = prevLastInput;
+        }
     }
 
     document.querySelector(".calc-display").innerText = displayValue;
@@ -137,11 +139,17 @@ function convertOperatorClassToOperator(className){
     // this code relies on the first class name of these divs being of the structure e.g divide <- this class MUST be first
     let operatorClass = className;
     // keep only first class
-    if (operatorClass.indexOf(" ") !== -1) currentOperator = operatorClass.substring(0, operatorClass.indexOf(" "));
+    if (operatorClass.indexOf(" ") !== -1) return operatorClass.substring(0, operatorClass.indexOf(" "));
 }
 
 function calcNumbers(e) {
     checkInputError();
+
+    let thisOperator = convertOperatorClassToOperator(this.parentElement.className);
+    if (isMultiplyOrDivide(lastInput) && thisOperator == "subtract"){
+        addNumberToDisplay(e);
+        return;
+    }
     if (lastInput === "") return;
     if (!isOperator(lastInput)) {
         if (lastInput !== "equals") {
@@ -151,9 +159,11 @@ function calcNumbers(e) {
             checkErrors(storedValue)
         }
 
-        convertOperatorClassToOperator(this.parentElement.className);
+        currentOperator = convertOperatorClassToOperator(this.parentElement.className);
         outputDisplay(currentOperator);
+        return;
     }
+
 }
 
 function calculateDisplay(e) {
@@ -169,6 +179,6 @@ function calculateDisplay(e) {
 }
 
 document.querySelectorAll(".number-btn").forEach(btn => btn.addEventListener("click", addNumberToDisplay));
-document.querySelector(".clear-btn").addEventListener("click", clearDisplay)
+document.querySelector(".clear-btn").addEventListener("click", clearDisplay);
 document.querySelectorAll(".operator-btn").forEach(btn => btn.addEventListener("click", calcNumbers));
-document.querySelector(".equals-btn").addEventListener("click", calculateDisplay)
+document.querySelector(".equals-btn").addEventListener("click", calculateDisplay);
